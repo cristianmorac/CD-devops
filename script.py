@@ -2,7 +2,7 @@ import json
 import subprocess
 import time
 
-REPO = "https://github.com/cristianmorac/bash.git"
+REPO = "https://github.com/cristianmorac/CD-devops.git"
 BRANCH = "main"
 CHECK_INTERVAL = 5
 
