@@ -7,8 +7,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 REPO = os.getenv("REPO_GIT")
-BRANCH = "main"
+BRANCH = os.getenv("BRANCH")
 CHECK_INTERVAL = 5
+yml_statefulset = os.getenv("YAML_STATEFULSET")
 
 def exec( cmd, cwd=".", returnjson=False ):
   out = subprocess.run( cmd, capture_output=True, text=True, encoding="utf8", cwd=cwd )
@@ -30,7 +31,7 @@ def exec( cmd, cwd=".", returnjson=False ):
 def process_pipeline():
     r = exec( [ "rm", "-R", "-f", "dir1" ] )
     #r = exec( [ "git", "clone", REPO, "dir1" ] )
-    r = exec( [ "kubectl", "apply", "-f", "sampleapp.yml" ] )
+    r = exec( [ "kubectl", "apply", "-f", yml_statefulset ] )
 
     #r = exec( [ "kubectl", "cp", "script.py", "nginx-statefulset-0:/usr/share/nginx/html" ] )
     #r = exec( [ "/bin/bash", "-c" ,"kubectl exec -it pod/nginx-statefulset-0 -- /bin/sh -c 'date > /usr/share/nginx/html/index.html'" ] )
