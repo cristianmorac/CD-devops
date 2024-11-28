@@ -1,8 +1,12 @@
 import json
 import subprocess
 import time
+import os
+from dotenv import load_dotenv
 
-REPO = "https://github.com/cristianmorac/CD-devops.git"
+load_dotenv()
+
+REPO = os.getenv("REPO_GIT")
 BRANCH = "main"
 CHECK_INTERVAL = 5
 
@@ -25,9 +29,7 @@ def exec( cmd, cwd=".", returnjson=False ):
 
 def process_pipeline():
     r = exec( [ "rm", "-R", "-f", "dir1" ] )
-
-    r = exec( [ "git", "clone", REPO, "dir1" ] )
-
+    #r = exec( [ "git", "clone", REPO, "dir1" ] )
     r = exec( [ "kubectl", "apply", "-f", "sampleapp.yml" ] )
 
     #r = exec( [ "kubectl", "cp", "script.py", "nginx-statefulset-0:/usr/share/nginx/html" ] )
