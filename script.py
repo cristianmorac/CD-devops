@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 REPO = os.getenv("REPO_GIT")
-BRANCH = os.getenv("BRANCH")
+BRANCH = os.getenv("BRANCH_GIT")
 CHECK_INTERVAL = 5
 yml_statefulset = os.getenv("YAML_STATEFULSET")
 
@@ -43,10 +43,10 @@ last_commit = ""
 
 while True: 
     r = exec( [ "git", "ls-remote", "--heads", REPO ] )
-    #print( r )
     commits = ("%s" % r.stdout).splitlines()
     commits = list( filter( lambda x: x.endswith( "refs/heads/" + BRANCH ), commits ) )
     commits = list( map( lambda x: x.split( "\t" ), commits ) )
+    print(commits)
 
     if last_commit != "" and last_commit != commits[0][0]:
        print( "Processint new commit: %s" % commits[0][0] )
